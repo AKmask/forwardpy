@@ -368,21 +368,21 @@ def conv6(lt,  cuda_use=True):
                             dtype=torch.float32)
     if cuda_use:
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        Tzz = torch.zeros((n, m), dtype=torch.float32) # z-direction normal stress field
-        Tzz1 = torch.zeros((n, m), dtype=torch.float32)
-        Tzz2 = torch.zeros((n, m), dtype=torch.float32)
-        Txx = torch.zeros((n, m), dtype=torch.float32) # x-direction normal stress field
-        Txx1 = torch.zeros((n, m), dtype=torch.float32)
-        Txx2 = torch.zeros((n, m), dtype=torch.float32)
-        Txz = torch.zeros((n, m), dtype=torch.float32) # shear stress field
-        Txz1 = torch.zeros((n, m), dtype=torch.float32)
-        Txz2 = torch.zeros((n, m), dtype=torch.float32)
-        Vx = torch.zeros((n, m), dtype=torch.float32) # s-wave velocity field
-        Vx1 = torch.zeros((n, m), dtype=torch.float32)
-        Vx2 = torch.zeros((n, m), dtype=torch.float32)
-        Vz = torch.zeros((n, m), dtype=torch.float32) # p-wave velocity field
-        Vz1 = torch.zeros((n, m), dtype=torch.float32)
-        Vz2 = torch.zeros((n, m), dtype=torch.float32)
+        Tzz = torch.zeros((n, m), dtype=torch.float32).to(device) # z-direction normal stress field
+        Tzz1 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Tzz2 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Txx = torch.zeros((n, m), dtype=torch.float32).to(device) # x-direction normal stress field
+        Txx1 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Txx2 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Txz = torch.zeros((n, m), dtype=torch.float32).to(device) # shear stress field
+        Txz1 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Txz2 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Vx = torch.zeros((n, m), dtype=torch.float32).to(device) # s-wave velocity field
+        Vx1 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Vx2 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Vz = torch.zeros((n, m), dtype=torch.float32).to(device) # p-wave velocity field
+        Vz1 = torch.zeros((n, m), dtype=torch.float32).to(device)
+        Vz2 = torch.zeros((n, m), dtype=torch.float32).to(device)
         Pz = torch.zeros((Nz, Nx), dtype=torch.float32).to(device)
         Px = torch.zeros((Nz, Nx), dtype=torch.float32).to(device)
         shot_record = torch.zeros((lt, Nx), dtype=torch.float32) # seismic data recording
@@ -391,23 +391,23 @@ def conv6(lt,  cuda_use=True):
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         Vp = Vp.to(device)
         Vs = Vs.to(device)
-        Tzz = Tzz.to(device)
-        Tzz1 = Tzz.to(device)
-        Tzz2 = Tzz.to(device)
-        Txx = Txx.to(device)
-        Txx1 = Txx.to(device)
-        Txx2 = Txx.to(device)
-        Txz = Txz.to(device)
-        Txz1 = Txz.to(device)
-        Txz2 = Txz.to(device)
-        Vx = Vx.to(device)
-        Vx1 = Vx.to(device)
-        Vx2 = Vx.to(device)
-        Vz = Vz.to(device)
-        Vz1 = Vz.to(device)
-        Vz2 = Vz.to(device)
-        Px = Px.to(device)
-        Pz = Pz.to(device)
+        #Tzz = Tzz.to(device)
+        #Tzz1 = Tzz.to(device)
+        #Tzz2 = Tzz.to(device)
+        #Txx = Txx.to(device)
+        #Txx1 = Txx.to(device)
+        #Txx2 = Txx.to(device)
+        #Txz = Txz.to(device)
+        #Txz1 = Txz.to(device)
+        #Txz2 = Txz.to(device)
+        #Vx = Vx.to(device)
+        #Vx1 = Vx.to(device)
+        #Vx2 = Vx.to(device)
+        #Vz = Vz.to(device)
+        #Vz1 = Vz.to(device)
+        #Vz2 = Vz.to(device)
+        #Px = Px.to(device)
+        #Pz = Pz.to(device)
         d = d.to(device)
         R2 = R2.to(device)
         R1 = R1.to(device)
@@ -418,7 +418,7 @@ def conv6(lt,  cuda_use=True):
         dt = torch.tensor(dt, dtype=torch.float32).to(device)
         kernel_x = kernel_x.to(device)
         ricker = ricker.to(device)
-        shot_record = shot_record.to(device)
+        #shot_record = shot_record.to(device)
     #Calculation of attenuation parameters
     half_dt_ddx = 0.5 * dt * ddx
     half_dt_ddz = 0.5 * dt * ddz
@@ -508,5 +508,6 @@ if __name__ == '__main__':
     print("compara S wave")
     # s-wave field imaging comparison
     make_pci(px61, px62)
+
 
 
